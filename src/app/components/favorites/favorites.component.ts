@@ -1,0 +1,41 @@
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PostService } from '../../services/post.service';
+
+@Component({
+  selector: 'app-favorites',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="glass-card p-4 mb-5">
+      <h2 class="gradient-text mb-4 text-center">
+        <i class="bi bi-heart-fill me-2"></i>
+        Preferiti
+      </h2>
+      
+      <div *ngIf="postService.preferiti.length === 0" class="text-center py-5">
+        <i class="bi bi-heart display-4 text-muted mb-3"></i>
+        <p class="text-muted">Nessun post aggiunto ai preferiti ancora.</p>
+      </div>
+
+      <div *ngIf="postService.preferiti.length > 0" class="row">
+        <div *ngFor="let post of postService.preferiti" class="col-md-6 col-lg-4 mb-3">
+          <div class="glass-card p-3 position-relative">
+            <button 
+              class="btn remove-btn position-absolute"
+              style="top: 10px; right: 10px;"
+              (click)="postService.rimuoviPreferito(post)">
+              <i class="bi bi-x"></i>
+            </button>
+            <h6 class="fw-bold mb-2 pe-5">{{ post.title }}</h6>
+            <p class="text-info small mb-2">{{ post.category }}</p>
+            <p class="text-secondary small mb-0">{{ post.body | slice:0:50 }}...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  `
+})
+export class FavoritesComponent {
+  postService = inject(PostService);
+}
