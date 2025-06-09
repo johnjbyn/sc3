@@ -118,4 +118,8 @@ export class PostService {
   isPreferito(post: Post): boolean {
     return this.preferiti.some(p => p.id === post.id);
   }
+
+   svuotaPreferiti() {
+    this.preferiti = [];
+  }
 }
