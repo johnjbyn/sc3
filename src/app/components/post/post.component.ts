@@ -7,27 +7,7 @@ import { PostService } from '../../services/post.service';
   selector: 'app-post',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="glass-card post-card p-4 mb-4">
-      <h3 class="mb-2 fw-bold">{{ post.title }}</h3>
-      <span class="category-badge mb-3 d-inline-block">{{ getCategoryTitle() }}</span>
-      <p class="text-secondary mb-3">{{ post.body }}</p>
-      <div class="d-flex justify-content-between align-items-center">
-        <small class="text-muted">
-          <i class="bi bi-calendar3 me-1"></i>
-          {{ getFormattedDate() }}
-        </small>
-        <button 
-          class="btn favorite-btn"
-          [class.active]="postService.isPreferito(post)"
-          (click)="toggleFavorite()">
-          <i class="bi" [class.bi-heart]="!postService.isPreferito(post)" 
-                        [class.bi-heart-fill]="postService.isPreferito(post)"></i>
-          {{ postService.isPreferito(post) ? 'Rimuovi' : 'Aggiungi' }}
-        </button>
-      </div>
-    </div>
-  `
+  templateUrl: './post.component.html',
 })
 export class PostComponent {
   @Input() post!: Post;
